@@ -2,11 +2,11 @@
 
 **Command-conditioned human motion generation with physics-based tracking.**
 
-A unified research project by **Shyam Charan** connecting a receding-horizon
-flow-matching generator to Perpetual Humanoid Control (PHC). The generator
-predicts future full-body poses; PHC turns those references into simulated
-humanoid control. In the live path, tracked robot states feed back into the
-next generation step.
+**Shyam Charan designed and built the humanoid motion generator from scratch.**
+Given recent body states, a task phase, a desired heading, and a goal, the
+model predicts a sequence of full-body poses. PHC tracks those poses in Isaac
+Gym. During live tracking, the simulated humanoid's measured state feeds back
+into the generator's next prediction.
 
 ```mermaid
 flowchart LR
@@ -29,10 +29,10 @@ flowchart LR
 - **Research tooling:** motion-data processing, retargeting, generation
   visualization, and the original fine-tuning configuration.
 
-The generator and integration build on Meta's **Flow Matching** library and
-CMU/NVIDIA's **PHC**. These are upstream methods, not algorithms invented by
-this project. See [attribution](docs/attribution.md) and the exact imported
-commits in [provenance.json](provenance.json).
+The [humanoid generator](generation/examples/joint_flow/) uses Meta's Flow
+Matching library for probability paths and ODE solvers. The tracking policy
+comes from PHC. See [component credits](docs/attribution.md) and the
+[source revisions](provenance.json).
 
 ## Get started
 

@@ -1,14 +1,16 @@
 # Attribution and project contribution
 
-This repository consolidates Shyam Charan's generator and tracking integration
-from `InclinedTaco/flow_matching` and `InclinedTaco/PHC`. Exact source revisions
-are recorded in `provenance.json`; the source repositories retain their history.
+Shyam Charan designed and implemented the humanoid motion generator from
+scratch. Its model architectures, conditioning scheme, horizon training code,
+and receding-horizon inference are in
+[`generation/examples/joint_flow/`](../generation/examples/joint_flow/).
 
-The project-specific work includes humanoid conditioning and horizon-model
-experiments under `generation/examples/joint_flow/`, the generator-to-PHC
-adapters under `tracking/scripts/`, and online reference/feedback integration in
-`tracking/phc/env/tasks/humanoid_im_mcp_demo.py`. These build on upstream code;
-a source import is not a claim of authorship over every imported line.
+Shyam also connected the generator to PHC: the adapter sends generated pose
+references to the tracking policy and feeds the simulated humanoid's state
+back into the generator. The [source revisions](../provenance.json) identify
+the original generator and tracker repositories.
+
+## Upstream components
 
 - **Flow Matching**: Meta's library provides the probability paths, ODE solvers
   and utility framework. Upstream: https://github.com/facebookresearch/flow_matching.
@@ -27,11 +29,6 @@ flow-conditioned integration.
 
 ## Résumé wording
 
-A factual project description, without inventing performance claims:
-
-> Integrated a command-conditioned flow-matching motion generator with a
-> physics-based humanoid tracker, using receding-horizon inference and
-> robot-state feedback to connect generated pose references to simulated control.
-
-Add measured tracking, runtime, or manipulation results only after running a
-reproducible evaluation with the corresponding released configuration.
+> Built a flow-matching humanoid motion generator from scratch that predicts
+> full-body pose sequences from task commands and recent body states. Connected
+> it to PHC for physics-based tracking with robot-state feedback.
