@@ -1,0 +1,44 @@
+{
+  "date": "2026-11-10",
+  "integration_tests": {
+    "passed": 7
+  },
+  "upstream_generator_tests": {
+    "passed": 46
+  },
+  "python_syntax": {
+    "files": 230,
+    "errors": 0
+  },
+  "generation_smoke": {
+    "checkpoint_name": "joint_flow_x16c_cross_h15",
+    "checkpoint_sha256": "9964475f07bddfcf5ee5c91a323a11f0a8278a0db815218e238c485d59fdd1cb",
+    "stats_sha256": "4872bbb5e46dd557b07ec702ddb5c8d6b8d23fbed4a6d1b49da88887e11d6203",
+    "device": "cpu",
+    "seed": 0,
+    "motion": "constant_walk",
+    "requested_seconds": 2,
+    "ode_steps": 4,
+    "stride": 5,
+    "gif_frames": 60,
+    "gif_size": [
+      700,
+      700
+    ],
+    "gif_duration_ms": 1800,
+    "artifact": "docs/media/generation-smoke.gif"
+  },
+  "tracking_adapter_cpu": {
+    "streams": 2,
+    "shape": [
+      2,
+      15,
+      76
+    ],
+    "finite": true
+  },
+  "physics_tracking": {
+    "validated": false,
+    "reason": "Complete PHC runtime and tracking assets unavailable in the validation environment."
+  }
+}

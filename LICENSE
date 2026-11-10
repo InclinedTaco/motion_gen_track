@@ -1,0 +1,8 @@
+This repository contains separately licensed components.
+
+- generation/: CC BY-NC 4.0; see generation/LICENSE and file-level notices.
+- tracking/: BSD 3-Clause Clear; see tracking/LICENSE and file-level notices.
+
+New root-level integration scripts, tests and documentation are provided under
+CC BY-NC 4.0; the full terms are in generation/LICENSE. This notice does not
+relicense imported components or external data, models, and simulator software.

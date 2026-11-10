@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "imports": [
+    {
+      "repository": "https://github.com/InclinedTaco/flow_matching",
+      "commit": "d536913a1f8c0e30c47cc31c2eb908d2cb00aafb",
+      "directory": "generation"
+    },
+    {
+      "repository": "https://github.com/InclinedTaco/PHC",
+      "commit": "160607e176ebe90a7c9e3b743fb01926eb46bf40",
+      "directory": "tracking"
+    }
+  ],
+  "excluded": [
+    "training checkpoints",
+    "datasets and motion recordings",
+    "run logs",
+    "experiment images and GIFs",
+    "machine-specific agent instructions"
+  ],
+  "note": "Source snapshots from committed GitHub heads; local uncommitted experiments were not imported. Original repositories and their histories are retained."
+}

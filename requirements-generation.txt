@@ -1,0 +1,7 @@
+-e ./generation
+h5py
+scipy
+matplotlib
+pillow
+tqdm
+scikit-learn

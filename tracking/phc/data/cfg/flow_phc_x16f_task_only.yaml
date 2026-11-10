@@ -1,0 +1,68 @@
+defaults:
+  - config
+  - override /env: env_im_getup_mcp
+  - override /robot: smpl_humanoid
+  - override /learning: im_mcp
+  - _self_
+
+project_name: PHC
+exp_name: flow_phc_x16f_task_only
+notes: "Task-only PHC MCP fine-tuning against frozen in-process x16f flow references."
+no_log: False
+headless: True
+test: False
+
+learning:
+  params:
+    load_checkpoint: True
+    load_path: output/HumanoidIm/phc_kp_mcp_iccv/Humanoid.pth
+    network:
+      has_softmax: True
+    config:
+      # rl_games treats max_epochs as an absolute epoch count when resuming.
+      # phc_kp_mcp_iccv/Humanoid.pth is saved at epoch 141250.
+      max_epochs: 142250
+      task_reward_w: 1.0
+      disc_reward_w: 0.0
+      disc_coef: 0.0
+
+env:
+  task: HumanoidImMCPDemo
+  obs_v: 7
+  episode_length: 300
+  num_envs: 1024
+  num_prim: 4
+  getup_schedule: False
+  z_activation: relu
+  power_reward: False
+  zero_out_far: False
+  motion_file: sample_data/amass_isaac_standing_upright_slim.pkl
+  models:
+    - output/HumanoidIm/phc_kp_pnn_iccv/Humanoid.pth
+
+  flow_ref_mode: inprocess
+  flow_ckpt: ../generation/checkpoints/joint_flow_x16f_phase_surviv_omomo_slowdrop_dropout_sched_h15_coldpad30_drop30/best.pt
+  flow_stats: ../generation/checkpoints/joint_flow_x16f_phase_surviv_omomo_slowdrop_dropout_sched_h15_coldpad30_drop30/stats.json
+  flow_feedback_source: curriculum
+  flow_reset_history_on_env_reset: True
+  flow_enable_tracking_reset: True
+  flow_tracking_reset_disable_collision: False
+  flow_stand_steps: 90
+  flow_stand_steps_min: 45
+  flow_stand_steps_max: 120
+  flow_hold_stand_ref: False
+  flow_random_heading: True
+  flow_heading_min: -3.14159265359
+  flow_heading_max: 3.14159265359
+  flow_heading_change_steps_min: 120
+  flow_heading_change_steps_max: 240
+  flow_heading_turn_rate: 0.01745329252
+  align_robot_start_to_flow_heading: True
+  flow_curriculum_warmup_epochs: 100
+  flow_curriculum_ramp_end_epochs: 700
+  flow_stride: 5
+  flow_ode_steps: 10
+
+robot:
+  freeze_hand: True
+  box_body: False
