@@ -5,12 +5,13 @@ settings and asset hashes are in [validation.json](validation.json).
 
 | Check | Result |
 | --- | --- |
-| Unified launcher integration tests | 7 passed |
+| Unified launcher integration tests | 8 passed |
 | Imported generator library tests | 46 passed |
 | Python syntax scan | 230 files parsed, no syntax errors |
 | Generation dependencies | All detected in the validation runtime |
 | Real checkpoint generation | CPU inference completed and saved a GIF |
 | PHC flow adapter | Loaded the consolidated generator and sampled two streams; all values finite, shape `(2, 15, 76)` |
+| Actual PHC Hydra config composition | Passed, including explicit checkpoints and paths with spaces |
 | Isaac Gym physics tracking | **Not validated**; complete PHC runtime and tracking assets unavailable |
 
 ## Generation smoke preview
@@ -38,7 +39,9 @@ PYTHONPATH=generation python -m unittest discover -s generation/tests -v
 python scripts/motion.py doctor
 ```
 
-The first two commands need only standard Python. The generator tests require
+The source scan and seven launcher tests need only standard Python. The eighth
+launcher test uses `hydra-core==1.3.2` and is skipped if it is unavailable; CI
+installs it to run all eight. The generator tests require
 the generation dependencies. To reproduce the animation, provide the matching
 checkpoint and stats identified by hashes in `validation.json`, then use:
 

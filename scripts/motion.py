@@ -72,7 +72,7 @@ def build_command(args):
         "env.getup_schedule=False", "env.zero_out_far=False", "env.power_reward=False",
         "env.motion_file=" + hydra_string(args.standing_motion),
         "env.models=[" + hydra_string(args.primitives) + "]",
-        "learning.params.load_checkpoint=True", "learning.params.load_path=" + hydra_string(args.composer),
+        "learning.params.load_checkpoint=True", "+learning.params.load_path=" + hydra_string(args.composer),
         "learning.params.network.has_softmax=True", "epoch=0", "test=True", "no_log=True",
         "headless=" + str(args.headless), "env.num_envs=" + str(args.envs),
         "env.episode_length=" + str(args.episode_steps), "seed=" + str(args.seed),

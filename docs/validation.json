@@ -1,7 +1,7 @@
 {
   "date": "2026-11-10",
   "integration_tests": {
-    "passed": 7
+    "passed": 8
   },
   "upstream_generator_tests": {
     "passed": 46
@@ -40,5 +40,10 @@
   "physics_tracking": {
     "validated": false,
     "reason": "Complete PHC runtime and tracking assets unavailable in the validation environment."
+  },
+  "hydra_config_composition": {
+    "passed": true,
+    "explicit_composer": true,
+    "test_mode": true
   }
 }

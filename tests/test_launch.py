@@ -21,7 +21,7 @@ class LaunchTests(unittest.TestCase):
         self.assertIn('test=True', cmd)
         self.assertIn('no_log=True', cmd)
         self.assertIn('epoch=0', cmd)
-        load = next(x.split('=', 1)[1] for x in cmd if x.startswith('learning.params.load_path='))
+        load = next(x.split('=', 1)[1] for x in cmd if x.startswith('+learning.params.load_path='))
         self.assertEqual(json.loads(load), args.composer)
         self.assertIn('learning.params.load_checkpoint=True', cmd)
         self.assertNotIn('--config-name', cmd)
@@ -56,6 +56,18 @@ class LaunchTests(unittest.TestCase):
     def test_missing_assets_fail_before_launch(self):
         with self.assertRaisesRegex(ValueError, 'Missing assets'):
             motion.validate_assets(self.args())
+
+    @unittest.skipUnless(importlib.util.find_spec("hydra"), "hydra-core is optional for source-only checks")
+    def test_actual_phc_hydra_config_composes(self):
+        from hydra import initialize_config_dir, compose
+        args = self.args(extra=['--composer', 'weights with spaces/composer.pth'])
+        _, cmd = motion.build_command(args)
+        with initialize_config_dir(config_dir=str(ROOT / 'tracking/phc/data/cfg'), version_base='1.2'):
+            cfg = compose(config_name='config', overrides=cmd[2:])
+            self.assertTrue(cfg.test)
+            self.assertTrue(cfg.learning.params.load_checkpoint)
+            self.assertEqual(cfg.learning.params.load_path, args.composer)
+            self.assertEqual(cfg.env.flow_ckpt, args.checkpoint)
 
     def test_source_layout_and_case_safety(self):
         paths = [str(p.relative_to(ROOT)) for p in ROOT.rglob('*') if p.is_file() and '.git' not in p.parts and '__pycache__' not in p.parts]
