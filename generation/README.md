@@ -1,10 +1,11 @@
 # Motion generation
 
-Shyam Charan built the [humanoid motion generator](examples/joint_flow/) from
-scratch. It uses the upstream [Flow Matching library](flow_matching/) for
-probability paths and ODE integration. Start with the [project quick start](../README.md)
-and [setup](../docs/setup.md).
+The [joint-flow models](examples/joint_flow/) predict sequences of humanoid
+poses from recent body states and task commands. This directory contains the
+model architectures, motion data loaders, training scripts, and
+visualization tools. The [Flow Matching library](flow_matching/) provides
+probability paths and ODE solvers.
 
-[Research instructions](RESEARCH.md) retain the original architecture and
-training details. Run those commands from this directory. Checkpoints and
-HDF5 datasets are external assets and are excluded from Git.
+See the [quick start](../README.md#run) to generate a motion preview or the
+[research guide](RESEARCH.md) to train a model. Run training commands from
+this directory and supply checkpoints and HDF5 datasets separately.

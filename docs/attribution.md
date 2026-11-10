@@ -1,14 +1,12 @@
-# Attribution and project contribution
+# Component credits
 
-Shyam Charan designed and implemented the humanoid motion generator from
-scratch. Its model architectures, conditioning scheme, horizon training code,
-and receding-horizon inference are in
-[`generation/examples/joint_flow/`](../generation/examples/joint_flow/).
+| Component | Credit |
+| --- | --- |
+| [Humanoid motion generator](../generation/examples/joint_flow/) — model architectures, conditioning, training, and inference | Shyam Charan |
+| [Online reference and robot-state feedback adapter](../tracking/phc/env/tasks/humanoid_im_mcp_demo.py) | Shyam Charan |
 
-Shyam also connected the generator to PHC: the adapter sends generated pose
-references to the tracking policy and feeds the simulated humanoid's state
-back into the generator. The [source revisions](../provenance.json) identify
-the original generator and tracker repositories.
+The [source revisions](../provenance.json) identify the generator and tracking
+repositories used in this release.
 
 ## Upstream components
 
@@ -26,9 +24,3 @@ the original generator and tracker repositories.
 The complete original PHC description and paper citations remain in
 `tracking/UPSTREAM.md`. Its benchmark tables describe upstream PHC, not this
 flow-conditioned integration.
-
-## Résumé wording
-
-> Built a flow-matching humanoid motion generator from scratch that predicts
-> full-body pose sequences from task commands and recent body states. Connected
-> it to PHC for physics-based tracking with robot-state feedback.
